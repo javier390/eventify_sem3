@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin - Lugares</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<h1 class="mb-4">Catálogo de Lugares</h1>
+
+<div class="mb-3">
+    <a th:href="@{/admin/venues/nuevo}" class="btn btn-primary">+ Nuevo Lugar</a>
+    <a th:href="@{/admin/events}" class="btn btn-outline-secondary">Ver Eventos</a>
+</div>
+
+<div th:if="${#lists.isEmpty(venues)}" class="alert alert-info">
+    Actualmente no hay lugares registrados
+</div>
+
+<table class="table table-striped" th:unless="${#lists.isEmpty(venues)}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Capacidad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="venue : ${venues}">
+        <td th:text="${venue.id}">1</td>
+        <td th:text="${venue.nombre}">Nombre</td>
+        <td th:text="${venue.direccion}">Dirección</td>
+        <td th:text="${venue.capacidad}">0</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

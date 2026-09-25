@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Evento</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<h1 class="mb-4">Registrar Nuevo Evento</h1>
+
+<form th:action="@{/admin/events}" th:object="${event}" method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" th:field="*{nombre}" />
+        <span class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-control" th:field="*{descripcion}"></textarea>
+        <span class="text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Fecha</label>
+        <input type="date" class="form-control" th:field="*{fecha}" />
+        <span class="text-danger" th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Lugar</label>
+        <select class="form-select" th:field="*{venue}">
+            <option value="">-- Seleccione un lugar --</option>
+            <option th:each="venue : ${venues}" th:value="${venue.id}" th:text="${venue.nombre}"></option>
+        </select>
+        <span class="text-danger" th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a th:href="@{/admin/events}" class="btn btn-link">Cancelar</a>
+
+</form>
+
+</body>
+</html>
